@@ -11,7 +11,7 @@
   - @settings.each do |setting|
     %tr
       %td= setting.area
-      %td= setting.notice_at
+      %td= setting.notice_at.strftime("%H:%M")
       %td= link_to 'Show', setting
       %td= link_to 'Edit', edit_setting_path(setting)
       %td= link_to 'Destroy', setting, :confirm => 'Are you sure?', :method => :delete

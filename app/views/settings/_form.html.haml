@@ -8,9 +8,10 @@
 
   .field
     = f.label :area
-    = f.text_field :area
+    = f.select(:area, area_index)
   .field
-    = f.label :notice_at
-    = f.datetime_select :notice_at, :use_month_numbers => true
+    = label_tag :notice_at
+    = select_tag(:notice_hour_at, hour_index)
+    = select_tag(:notice_min_at, min_index)
   .actions
     = f.submit 'Save'

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_one :setting
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -10,11 +11,14 @@ class User < ActiveRecord::Base
 
   def self.send_notifications
     self.select_target_users.each do |user|
-      response = ApiAccess.api_get({:p1 => "4410"})
-      probability = Weather.extract_probability(response).to_i
-      if Weather.notice?(probability)
-        Notifier.deliver_notice_email(user, probability)
-        logger.info "[Mail] send email to #{user.email}"
+      response = ApiAccess.api_get({:key => "9c3c43e05e884ef1204c9448ea8b6e7a37a745200b612fd2473654d92bebaa2b", :pref => user.setting.area, :budget => "01", :url => "http://bar.com", :pattern => "0"})
+      if shop = Bar.extract_shop(response)
+        email = Notifier.notice_email(user, shop)
+        p email.body
+      else
+        "条件変えましょう的な"
+#        Notifier.deliver_notice_email(user, shop)
+#        logger.info "[Mail] send email to #{user.email}"
       end
     end
   end

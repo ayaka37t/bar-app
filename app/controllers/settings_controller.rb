@@ -40,8 +40,9 @@ class SettingsController < ApplicationController
   # POST /settings
   # POST /settings.xml
   def create
-    @setting = Setting.new(params[:setting])
-
+    @setting = current_user.build_setting(params[:setting])
+    @setting.notice_at = Time.local(2011, 10, 31, params[:notice_hour_at], params[:notice_min_at])
+    p @setting.notice_at
     respond_to do |format|
       if @setting.save
         format.html { redirect_to(@setting, :notice => 'Setting was successfully created.') }
