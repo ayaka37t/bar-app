@@ -1,5 +1,10 @@
 Casamotta::Application.routes.draw do
   resources :settings, :only => %w(new create update)
+  resource :kicks, :only => %w() do
+    member do
+      get 'execute'
+    end
+  end
 
   devise_for :users
 
