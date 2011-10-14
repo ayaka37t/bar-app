@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Notifier < ActionMailer::Base
   default :from => "any_from_address@example.com"
 

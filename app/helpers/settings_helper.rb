@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module SettingsHelper
 
   def area_index
