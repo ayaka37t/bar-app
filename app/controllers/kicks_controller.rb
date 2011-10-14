@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class KicksController < ApplicationController
   skip_before_filter :authenticate_user!
 
