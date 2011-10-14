@@ -24,7 +24,7 @@ class SettingsController < ApplicationController
   # GET /settings/new
   # GET /settings/new.xml
   def new
-    @setting = Setting.new
+    @setting = current_user.setting || Setting.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -33,24 +33,19 @@ class SettingsController < ApplicationController
   end
 
   # GET /settings/1/edit
-  def edit
-    @setting = Setting.find(params[:id])
-  end
+#  def edit
+#    @setting = Setting.find(params[:id])
+#  end
 
   # POST /settings
   # POST /settings.xml
   def create
     @setting = current_user.build_setting(params[:setting])
-    @setting.notice_at = Time.local(2011, 10, 31, params[:notice_hour_at], params[:notice_min_at])
-    p @setting.notice_at
+    @setting.notice_at = Time.local(2011, 10, 31, @setting.notice_at.hour, @setting.notice_at.min)
+    @setting.save
     respond_to do |format|
-      if @setting.save
-        format.html { redirect_to(@setting, :notice => 'Setting was successfully created.') }
-        format.xml  { render :xml => @setting, :status => :created, :location => @setting }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @setting.errors, :status => :unprocessable_entity }
-      end
+      format.html { redirect_to :root }
+      format.xml  { head :ok }
     end
   end
 
@@ -58,15 +53,11 @@ class SettingsController < ApplicationController
   # PUT /settings/1.xml
   def update
     @setting = Setting.find(params[:id])
-
+    @setting.notice_at = Time.local(2011, 10, 31, @setting.notice_at.hour, @setting.notice_at.min)
+    @setting.update_attributes(params[:setting])
     respond_to do |format|
-      if @setting.update_attributes(params[:setting])
-        format.html { redirect_to(@setting, :notice => 'Setting was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @setting.errors, :status => :unprocessable_entity }
-      end
+      format.html { redirect_to :root }
+      format.xml  { head :ok }
     end
   end
 

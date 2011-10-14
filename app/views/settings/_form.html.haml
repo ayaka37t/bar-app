@@ -10,8 +10,7 @@
     = f.label :area
     = f.select(:area, area_index)
   .field
-    = label_tag :notice_at
-    = select_tag(:notice_hour_at, hour_index)
-    = select_tag(:notice_min_at, min_index)
+    = f.label :notice_at
+    = f.datetime_select(:notice_at, :discard_year => true, :discard_month => true, :minute_step => 15)
   .actions
     = f.submit 'Save'

@@ -1,5 +1,5 @@
 Casamotta::Application.routes.draw do
-  resources :settings
+  resources :settings, :only => %w(new create update)
 
   devise_for :users
 
@@ -52,7 +52,7 @@ Casamotta::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => "settings#index"
+  root :to => "settings#new"
 
   # See how all your routes lay out with "rake routes"
 

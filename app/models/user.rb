@@ -24,8 +24,9 @@ class User < ActiveRecord::Base
   end
 
   def self.select_target_users
-    # TODO : 通知対象ユーザを返すようにすること
-    self.all
+    time_now = Time.local(2011,10,31,Time.now.hour,Time.now.min)
+    self.all.select{|user| user.setting.notice_at < (time_now.since 2.5.minutes) && user.setting.notice_at > (time_now.ago 2.5.minutes)}
   end
 
 end
+
