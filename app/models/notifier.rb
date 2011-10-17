@@ -4,7 +4,7 @@ class Notifier < ActionMailer::Base
 
   def notice_email(user, shop)
     subject = "本日のbar情報"
-    body = "今日のおすすめは#{shop.type}の#{shop.name}★　→#{shop.url_mobile}#{shop.address}"
+    body = "今日のおすすめは#{shop.type}の#{shop.name}★　→#{shop.url_mobile}　#{shop.address}"
     mail(:to => user.email, :subject => subject, :body => body)
   end
 
