@@ -51,4 +51,8 @@ module SettingsHelper
       ["沖縄県","47"]]
   end
 
+  def area_index_show(area)
+    area_index.select{|record| record[1] == area}.first[0]
+  end
+
 end

@@ -1,5 +1,5 @@
 Casamotta::Application.routes.draw do
-  resources :settings, :only => %w(new create update)
+  resources :settings, :only => %w(new create edit update show)
   resource :kicks, :only => %w() do
     member do
       get 'execute'

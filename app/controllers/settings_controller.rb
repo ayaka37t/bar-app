@@ -34,9 +34,9 @@ class SettingsController < ApplicationController
   end
 
   # GET /settings/1/edit
-#  def edit
-#    @setting = Setting.find(params[:id])
-#  end
+  def edit
+    @setting = current_user.setting
+  end
 
   # POST /settings
   # POST /settings.xml
@@ -45,7 +45,7 @@ class SettingsController < ApplicationController
     @setting.notice_at = Time.local(2011, 10, 31, @setting.notice_at.hour, @setting.notice_at.min)
     @setting.save
     respond_to do |format|
-      format.html { redirect_to :root }
+      format.html { redirect_to(setting_url(@setting))}
       format.xml  { head :ok }
     end
   end
@@ -57,7 +57,7 @@ class SettingsController < ApplicationController
     @setting.notice_at = Time.local(2011, 10, 31, @setting.notice_at.hour, @setting.notice_at.min)
     @setting.update_attributes(params[:setting])
     respond_to do |format|
-      format.html { redirect_to :root }
+      format.html { redirect_to(setting_url(@setting))}
       format.xml  { head :ok }
     end
   end

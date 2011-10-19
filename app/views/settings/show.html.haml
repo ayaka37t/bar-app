@@ -2,11 +2,11 @@
 
 %p
   %b Area:
-  = @setting.area
+  = area_index_show(@setting.area)
 %p
   %b Notice at:
-  = @setting.notice_at
+  = @setting.notice_at.strftime("%H:%M")
 
 = link_to 'Edit', edit_setting_path(@setting)
 \|
-= link_to 'Back', settings_path
+= link_to "Sign out", destroy_user_session_path, :method => :delete

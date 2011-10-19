@@ -1,24 +1,5 @@
 %h1 Editing setting
 
-= form_for @setting do |f|
-  -if @setting.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@setting.errors.count, "error")} prohibited this setting from being saved:"
-      %ul
-        - @setting.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :area
-    = f.select(:area, area_index)
-  .field
-    = label_tag :notice_at
-    = select_tag(:notice_hour_at, hour_index)
-    = select_tag(:notice_min_at, min_index)
-  .actions
-    = f.submit 'Save'
-
-= link_to 'Show', @setting
-\|
+= render 'form'
 
 = link_to "Sign out", destroy_user_session_path, :method => :delete
