@@ -4,7 +4,6 @@ class SettingsController < ApplicationController
   # GET /settings.xml
   def index
     @settings = Setting.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @settings }
@@ -15,7 +14,7 @@ class SettingsController < ApplicationController
   # GET /settings/1.xml
   def show
     @setting = Setting.find(params[:id])
-
+    @pref = Station.search_pref(current_user)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @setting }

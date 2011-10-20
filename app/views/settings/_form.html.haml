@@ -6,9 +6,12 @@
         - @setting.errors.full_messages.each do |msg|
           %li= msg
 
+  -#.field
+    = f.label :area
+    = f.select(:area, Setting.prefecture_index)
   .field
     = f.label :area
-    = f.select(:area, area_index)
+    = f.text_field(:area)
   .field
     = f.label :notice_at
     = f.datetime_select(:notice_at, :discard_year => true, :discard_month => true, :minute_step => 15)

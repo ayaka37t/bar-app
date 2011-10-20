@@ -2,7 +2,9 @@
 
 %p
   %b Area:
-  = area_index_show(@setting.area)
+  -#= Setting.prefecture_index_show(@setting.area)
+  = @setting.area
+  = @pref
 %p
   %b Notice at:
   = @setting.notice_at.strftime("%H:%M")
