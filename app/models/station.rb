@@ -12,6 +12,22 @@ class Station < ActiveRecord::Base
     end
   end
 
+  def self.search_station(params)
+    uri = URI.parse("http://www.ekidata.jp/api/n.php")
+    uri.query = {"w" => params}.to_query
+    res = self.api_request(:get, uri.to_s)
+    unless res["ekidata"]["station"].blank?
+      case res["ekidata"]["station"].class.to_s
+      when "Array"
+        res["ekidata"]["station"].map {|record| record['station_name']}.uniq
+      else
+        res["ekidata"]["station"].station_name
+      end
+    else
+      "ないです"
+    end
+  end
+
 
 private
   def self.api_request method, uri

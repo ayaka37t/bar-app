@@ -67,5 +67,6 @@ class SettingsController < ApplicationController
 
   def search
     @params_station = params[:station]
+    @station = Station.search_station(current_user)
   end
 end
