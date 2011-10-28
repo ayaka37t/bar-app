@@ -7,11 +7,11 @@
           %li= msg
 
   -#.field
-    = f.label :area
-    = f.select(:area, Setting.prefecture_index)
+    = f.label :station
+    = f.select(:station, Setting.prefecture_index)
   .field
-    = f.label :area
-    = f.text_field(:area)
+    = f.label :station
+    = f.text_field(:station)
   .field
     = f.label :notice_at
     = f.datetime_select(:notice_at, :discard_year => true, :discard_month => true, :minute_step => 15)

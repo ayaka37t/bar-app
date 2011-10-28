@@ -1,0 +1,11 @@
+%h1 候補を入れるとこ
+
+= form_tag({:controller=>"settings", :action => "search"}, :method => :get) do
+
+  .field
+    = label_tag :station
+    = text_field_tag(:station)
+  .actions
+    = submit_tag 'Save'
+
+= link_to "Sign out", destroy_user_session_path, :method => :delete

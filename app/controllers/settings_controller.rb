@@ -14,7 +14,8 @@ class SettingsController < ApplicationController
   # GET /settings/1.xml
   def show
     @setting = Setting.find(params[:id])
-    @pref = Station.search_pref(current_user)
+    pref_id = Station.search_pref(current_user)
+    @pref = Setting.prefecture_index_show(pref_id)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @setting }
@@ -61,15 +62,10 @@ class SettingsController < ApplicationController
     end
   end
 
-  # DELETE /settings/1
-  # DELETE /settings/1.xml
-  def destroy
-    @setting = Setting.find(params[:id])
-    @setting.destroy
+  def init
+  end
 
-    respond_to do |format|
-      format.html { redirect_to(settings_url) }
-      format.xml  { head :ok }
-    end
+  def search
+    @params_station = params[:station]
   end
 end

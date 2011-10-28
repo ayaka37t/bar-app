@@ -3,7 +3,7 @@ class Station < ActiveRecord::Base
 
   def self.search_pref(user)
     uri = URI.parse("http://www.ekidata.jp/api/n.php")
-    uri.query = {"w" => user.setting.area}.to_query
+    uri.query = {"w" => user.setting.station}.to_query
     res = self.api_request(:get, uri.to_s)
     if res["ekidata"]["station"][0]
       sprintf("%02d", res["ekidata"]["station"][0]["pref_cd"])
@@ -12,8 +12,6 @@ class Station < ActiveRecord::Base
     end
   end
 
-#      prefecture = sprintf("%02d", res["ekidata"]["station"][0]["pref_cd"])
-#    Setting.prefecture_index_show(prefecture)
 
 private
   def self.api_request method, uri

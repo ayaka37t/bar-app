@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 class Setting < ActiveRecord::Base
   belongs_to :user
-  validates_presence_of :area
+  validates_presence_of :pref
+  validates_presence_of :station
   validates_presence_of :notice_at
 
   def self.prefecture_index
@@ -54,8 +55,8 @@ class Setting < ActiveRecord::Base
       ["沖縄県","47"]]
   end
 
-  def self.prefecture_index_show(prefecture)
-    self.prefecture_index.select{|record| record[1] == prefecture}.first[0]
+  def self.prefecture_index_show(prefecture_id)
+    self.prefecture_index.select{|record| record[1] == prefecture_id}.first[0]
   end
 
 end
